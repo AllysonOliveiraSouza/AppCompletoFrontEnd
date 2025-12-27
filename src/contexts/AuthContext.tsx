@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { TOKEN_KEY } from "../services/authService";
+import { getToken, TOKEN_KEY } from "../services/authService";
 import type { Usuario } from "../models/Usuario";
 import { requestsApi } from "../static/requestsApi";
 
@@ -18,10 +18,8 @@ export const AuthProvider = ({ children }: any) => {
   // Carregamento
 
   const load = async () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      await getUser(token);
-    }
+    const token = getToken();
+    if (token) await getUser(token);
     setLoading(false);
   };
 

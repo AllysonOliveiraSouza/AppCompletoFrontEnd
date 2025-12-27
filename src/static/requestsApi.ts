@@ -27,7 +27,7 @@ const Post: any = async (url: string, body: {}, tokenJwt?: string) => {
   }
 };
 
-const Get: any = async (url: string, tokenJwt: string) => {
+async function Get(url: string, tokenJwt?: string | null): Promise<any> {
   if (tokenJwt) {
     let response = await fetch(url, {
       headers: {
@@ -37,6 +37,19 @@ const Get: any = async (url: string, tokenJwt: string) => {
     });
     return response;
   }
-};
+}
 
-export const requestsApi = { Post, Get };
+async function Patch(url: string, tokenJwt?: string | null): Promise<any> {
+  if (tokenJwt) {
+    let response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenJwt}`,
+      },
+      method: "PATCH",
+    });
+    return response;
+  }
+}
+
+export const requestsApi = { Post, Get, Patch };

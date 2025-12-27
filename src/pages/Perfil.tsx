@@ -16,7 +16,6 @@ export default function Perfil() {
 
   function pageAtribuirAdm() {
     navigate("/atribuir-adm");
-    alert("Clicou");
   }
 
   return (
